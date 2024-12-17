@@ -1,5 +1,17 @@
 from app import books
 
+USER_CHOICE = """Enter one of the following
+
+- 'b' to look at the best books
+- 'c' to look at the cheapest books
+- 'n' to just get the next available book on the catalogue
+- 'q' to quit
+
+Enter your choice: """
+
+input_choice = input(USER_CHOICE)
+
+
 
 def print_best_books():
     """_summary_:
@@ -24,7 +36,23 @@ def print_cheapest_books():
         print(book)
 
 
-print_best_books()
+books_generator = (x for x in books.books) # generator object
+def print_next_book():
+    """_summary_:
+    print the next book in the catalogue
+    """
+    print(next(books_generator))
 
-print("----------- Cheap Books -----------")
-print_cheapest_books()
+
+
+
+while input_choice != 'q':
+    if input_choice == 'b':
+        print_best_books()
+    elif input_choice == 'c':
+        print_cheapest_books()
+    elif input_choice == 'n':
+        print_next_book()
+    else:
+        print("Please enter a valid choice")
+    input_choice = input(USER_CHOICE)
