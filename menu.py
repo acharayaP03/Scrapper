@@ -1,13 +1,7 @@
-import os
-import time
-import pyfiglet
-from app import books
-from tqdm import tqdm
-from colorama import init, Fore, Style
 
-# Initialize colorama
-init()
-ASCII_ART = pyfiglet.figlet_format(f"Book Scraper", font="slant")
+from app import books
+from utils.constants import USER_CHOICE
+from utils.utilities import display_ascii_art, clear_console
 
 def print_best_books():
     """_summary_:
@@ -21,8 +15,6 @@ def print_best_books():
     for book in best_books:
         print(book)
 
-
-
 def print_cheapest_books():
     """_summary_:
     sort the books by price in ascending order and print the top 10
@@ -31,28 +23,12 @@ def print_cheapest_books():
     for book in cheapest_books:
         print(book)
 
-
 books_generator = (x for x in books) # generator object
 def print_next_book():
     """_summary_:
     print the next book in the catalogue
     """
     print(next(books_generator))
-
-
-def clear_console():
-    """Clear the console based on the operating system."""
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
-USER_CHOICE = f"""{Fore.GREEN}Enter one of the following
-
-- 'b' to look at the best books
-- 'c' to look at the cheapest books
-- 'n' to just get the next available book on the catalogue
-- 'q' to quit
-
-Enter your choice: {Style.RESET_ALL}"""
 
 user_choices = {
     'b': print_best_books,
@@ -80,5 +56,5 @@ def menu():
 
 # Clear the console
 clear_console()
-print(ASCII_ART) # need it here since clear
+display_ascii_art()
 menu()
