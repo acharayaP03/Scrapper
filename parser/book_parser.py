@@ -1,6 +1,9 @@
 import re
+import logging  
 from locators.books_locators import BookLocators
 
+
+logger = logging.getLogger('scraping.book_parser')
 class BookParser:
     """_summary_:
     A class to take in an HTML page (or part of one), and find properties of an item in it.
@@ -14,6 +17,7 @@ class BookParser:
     }
 
     def __init__(self, parent):
+        logger.debug(f'New book parser created from `{parent}`.')
         self.parent = parent
 
     def __repr__(self):
