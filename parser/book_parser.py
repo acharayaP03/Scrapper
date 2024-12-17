@@ -1,3 +1,4 @@
+import re
 from locators.books_locators import BookLocators
 
 class BookParser:
@@ -51,8 +52,8 @@ class BookParser:
         """
         locator = BookLocators.PRICE_LOCATOR
         item_price = self.parent.select_one(locator).string
-        item_price = item_price.replace('Â', '')
-        return float(item_price)
+        price_string = re.sub(r'[^\d.]', '', item_price.string)
+        return float(price_string)
 
     @property
     def rating(self):
