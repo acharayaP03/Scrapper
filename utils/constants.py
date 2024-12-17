@@ -13,3 +13,5 @@ USER_CHOICE = f"""{Fore.GREEN}Enter one of the following
 - 'q' to quit
 
 Enter your choice: {Style.RESET_ALL}"""
+
+BOOKS_STORE_URL = 'http://books.toscrape.com'

@@ -8,8 +8,11 @@
 import requests
 import pyfiglet
 import os
+import logging
 from requests.exceptions import RequestException, Timeout
 
+
+logger = logging.getLogger('scraping.utilities')
 
 def fetch_page(url: str) -> bytes:
     """Fetch the content of the given URL.
@@ -30,15 +33,17 @@ def fetch_page(url: str) -> bytes:
         return response.content
     except Timeout:
         print(f"Request to {url} timed out.")
+        logger.error(f"Request to {url} timed out.")
         raise
     except RequestException as e:
         print(f"An error occurred: {e}")
+        logger.error(f"An error occurred: {e}")
         raise
 
 def display_ascii_art():
     """Display the ASCII art for the application."""
-    ASCII_ART = pyfiglet.figlet_format(f"Book Scraper", font="slant")
-    print(ASCII_ART)
+    ascii_art = pyfiglet.figlet_format("Book Scraper", font="slant")
+    print(ascii_art)
 
 def clear_console():
     """Clear the console based on the operating system."""
