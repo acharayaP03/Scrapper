@@ -44,15 +44,16 @@ def print_next_book():
     print(next(books_generator))
 
 
+user_choices = {
+    'b': print_best_books,
+    'c': print_cheapest_books,
+    'n': print_next_book
+}
 
 
 while input_choice != 'q':
-    if input_choice == 'b':
-        print_best_books()
-    elif input_choice == 'c':
-        print_cheapest_books()
-    elif input_choice == 'n':
-        print_next_book()
+    if user_choices in ('b', 'c', 'n'):
+        user_choices[input_choice]() # call the function depending on the user input
     else:
         print("Please enter a valid choice")
     input_choice = input(USER_CHOICE)
