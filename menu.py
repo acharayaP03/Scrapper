@@ -1,18 +1,5 @@
 from app import books
 
-USER_CHOICE = """Enter one of the following
-
-- 'b' to look at the best books
-- 'c' to look at the cheapest books
-- 'n' to just get the next available book on the catalogue
-- 'q' to quit
-
-Enter your choice: """
-
-input_choice = input(USER_CHOICE)
-
-
-
 def print_best_books():
     """_summary_:
     sort the books by rating in descending order and print the top 10
@@ -44,16 +31,29 @@ def print_next_book():
     print(next(books_generator))
 
 
+USER_CHOICE = """Enter one of the following
+
+- 'b' to look at the best books
+- 'c' to look at the cheapest books
+- 'n' to just get the next available book on the catalogue
+- 'q' to quit
+
+Enter your choice: """
+
 user_choices = {
     'b': print_best_books,
     'c': print_cheapest_books,
     'n': print_next_book
 }
 
-
-while input_choice != 'q':
-    if user_choices in ('b', 'c', 'n'):
-        user_choices[input_choice]() # call the function depending on the user input
-    else:
-        print("Please enter a valid choice")
+def menu():
+    """Display the menu and handle user input"""
     input_choice = input(USER_CHOICE)
+    while input_choice != 'q':
+        if input_choice in user_choices:
+            user_choices[input_choice]()  # call the function depending on the user input
+        else:
+            print("Please enter a valid choice")
+        input_choice = input(USER_CHOICE)
+
+menu()
