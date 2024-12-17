@@ -48,7 +48,7 @@ books = page.books
 print(ASCII_ART)
 
 
-for page_num in tqdm(range(1, 50), desc="Processing", bar_format="{l_bar}{bar} [ time left: {remaining} ]"):
+for page_num in tqdm(range(1, page.page_count), desc="Processing", bar_format="{l_bar}{bar} [ time left: {remaining} ]"):
     url = f'http://books.toscrape.com/catalogue/page-{page_num+1}.html'
     page_content = fetch_page(url)
     page = BooksPage(page_content)
