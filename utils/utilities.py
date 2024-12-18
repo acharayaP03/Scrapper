@@ -10,6 +10,7 @@ import pyfiglet
 import os
 import logging
 from requests.exceptions import RequestException, Timeout
+from utils.constants import CURRENCY_INFO, CURRENCY_CONVERTER_API_URL
 
 
 logger = logging.getLogger('scraping.utilities')
@@ -40,7 +41,25 @@ def fetch_page(url: str) -> bytes:
         logger.error(f"An error occurred: {e}")
         raise
 
-def display_ascii_art():
+def get_exchange_rate(base_currency: str, target_currency: str) -> float:
+    """Fetch the exchange rate from base_currency to target_currency."""
+    api_url = f"{CURRENCY_CONVERTER_API_URL}{base_currency}"
+    response = requests.get(api_url, timeout=10)
+    data = response.json()
+    return data['rates'][target_currency]
+
+
+
+def convert_price(price: float, exchange_rate: float) -> float:
+    """Convert the price using the given exchange rate."""
+    return price * exchange_rate
+
+def get_currency_info(currency_code):
+    """Get the currency info for the given currency code."""
+    return CURRENCY_INFO.get(currency_code, {'symbol': currency_code, 'country': 'Unknown'})
+
+
+def display_ascii_art() -> str:
     """Display the ASCII art for the application."""
     ascii_art = pyfiglet.figlet_format("Book Scraper", font="slant")
     print(ascii_art)
@@ -48,3 +67,15 @@ def display_ascii_art():
 def clear_console():
     """Clear the console based on the operating system."""
     os.system('cls' if os.name == 'nt' else 'clear')
+
+def truncate_title(title: str, max_length: int = 100) -> str:
+    """Truncate the title to the given length.
+
+    Args:
+        title (str): The title to truncate.
+        max_length (int, optional): The maximum length of the title. Defaults to 50.
+
+    Returns:
+        str: The truncated title.
+    """
+    return title if len(title) <= max_length else title[:max_length - 3] + '...'
