@@ -18,7 +18,7 @@ The requirment text includes all the module used for this project, just install 
 
 ![image](https://github.com/user-attachments/assets/542be613-46cb-45c9-940e-a2ba222b71dd)
 
-![image](https://github.com/user-attachments/assets/2369396d-2f54-47f6-9497-4bbda428e991)
+![image](https://github.com/user-attachments/assets/4b2632c9-08a3-497b-b242-b4bd185cf0e4)
 
 
 ## Todo
